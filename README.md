@@ -1,16 +1,12 @@
-# Example Home Assistant add-on repository
+# Home Assistant Ecowitt Proxy add-on repository
 
-This repository can be used as a "blueprint" for add-on development to help you get started.
-
-Add-on documentation: <https://developers.home-assistant.io/docs/add-ons>
-
-[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Faddons-example)
+[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fchrisromp%2Faddon-ecowitt-proxy)
 
 ## Add-ons
 
 This repository contains the following add-ons
 
-### [Example add-on](./example)
+### [Ecowitt Proxy](./ecowitt-proxy)
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
@@ -18,7 +14,7 @@ This repository contains the following add-ons
 ![Supports armv7 Architecture][armv7-shield]
 ![Supports i386 Architecture][i386-shield]
 
-_Example add-on to use as a blueprint for new add-ons._
+_An HTTP proxy for Ecowitt weather stations to foward to the Home Assistant Ecowitt integration since Ecowitt does not support HTTPS._
 
 <!--
 
