@@ -10,13 +10,11 @@ arch:
   - armhf
   - armv7
   - i386
-startup: application
 ports:
   8081/tcp: 8081
 ports_description:
   8081/tcp: "The port to listen on for Ecowitt weather station data"
 host_network: true
-watchdog: tcp://[HOST]:[PORT:8081]
 options:
   Webhook_ID: ""
 schema:
