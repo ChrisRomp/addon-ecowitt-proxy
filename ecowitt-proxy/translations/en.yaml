@@ -1,0 +1,7 @@
+configuration:
+  Webhook_ID:
+    name: Webhook ID
+    description: The unique ID for the webhook for the Ecowitt integration (shown on setup).
+  Log_Level:
+    name: Log Level
+    description: Verbosity of the log output for the add-on.
