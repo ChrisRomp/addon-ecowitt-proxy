@@ -1,8 +1,8 @@
 name: Builder
 
 env:
-  BUILD_ARGS: "--test"
-  MONITORED_FILES: "build.yaml config.yaml Dockerfile rootfs"
+  BUILD_ARGS: ""
+  MONITORED_FILES: "build.yaml config.yaml Dockerfile app"
 
 on:
   push:
