@@ -4,7 +4,6 @@
 ## 0.1.16
 
 - Fix DOCS.md screenshot
-- Add release drafter workflow
 - Add build configuration
 
 ## 0.1.15
