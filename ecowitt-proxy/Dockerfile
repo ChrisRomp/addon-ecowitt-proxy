@@ -13,7 +13,7 @@ EXPOSE 8081
 
 # ChrisRomp@users.noreply.github.com
 LABEL \
-  io.hass.version="0.1.15" \
+  io.hass.version="0.1.16" \
   io.hass.type="addon" \
   io.hass.arch="armhf|aarch64|i386|amd64|armv7"
 
