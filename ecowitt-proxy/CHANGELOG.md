@@ -1,6 +1,10 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 # Ecowitt Proxy Add-On
 
+## 0.1.17
+
+- Remove DOCS.md screenshot and replace with table
+
 ## 0.1.16
 
 - Fix DOCS.md screenshot
