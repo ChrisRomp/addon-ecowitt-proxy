@@ -9,11 +9,9 @@ RUN mkdir /app
 COPY app/ /app
 RUN chmod a+x /app/run.sh
 
-EXPOSE 8081
-
 # ChrisRomp@users.noreply.github.com
 LABEL \
-  io.hass.version="0.1.17" \
+  io.hass.version="0.1.18" \
   io.hass.type="addon" \
   io.hass.arch="armhf|aarch64|i386|amd64|armv7"
 

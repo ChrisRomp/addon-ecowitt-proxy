@@ -2,6 +2,9 @@ configuration:
   Webhook_ID:
     name: Webhook ID
     description: The unique ID for the webhook for the Ecowitt integration (shown on setup).
+  TCP_Port:
+    name: TCP Port
+    description: The port to listen on for Ecowitt weather station data.
   Log_Level:
     name: Log Level
     description: Verbosity of the log output for the add-on.
