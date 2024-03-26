@@ -28,7 +28,7 @@ jobs:
         # uses: jitterbit/get-changed-files@v1
         run: |
           git fetch origin main
-          diff=$(git diff --name-only --diff-filter=AMRD main | tr '\n' ' ')
+          diff=$(git diff --name-only --diff-filter=AMRD origin/main | tr '\n' ' ')
           echo "CHANGED_FILES=$diff" >> "$GITHUB_OUTPUT"
 
       - name: Find add-on directories
