@@ -55,7 +55,7 @@ jobs:
           echo "Base commit: $base_commit"
           echo "Head commit: $head_commit"
           git fetch origin $base_commit
-          diff=$(git diff --name-only --diff-filter=AMRD $head_commit..$base_commit | tr '\n' ' ')
+          diff=$(git diff --name-only --diff-filter=AMRD $base_commit | tr '\n' ' ')
           echo "Changed files: $diff"
           echo "CHANGED_FILES=$diff" >> "$GITHUB_OUTPUT"
 
