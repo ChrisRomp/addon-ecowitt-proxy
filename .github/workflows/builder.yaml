@@ -21,15 +21,30 @@ jobs:
       changed: ${{ steps.changed_addons.outputs.changed }}
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4
 
       - name: Get changed files
         id: changed_files
-        # uses: jitterbit/get-changed-files@v1
+        env:
+          CONTEXT_BASE_REF: ${{ github.base_ref }}
+          CONTEXT_EVENT: ${{ github.event_name }}
+          CONTEXT_PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          CONTEXT_PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -e
-          git fetch origin main
-          diff=$(git diff --name-only --diff-filter=AMRD origin/main~1 | tr '\n' ' ')
+          echo "Base ref: $CONTEXT_BASE_REF"
+          echo "Actions event: $CONTEXT_EVENT"
+          if [ "$CONTEXT_EVENT" == "pull_request" ]; then
+            base_commit=$CONTEXT_PR_BASE_SHA
+          elif [ "$CONTEXT_EVENT" == "push" ]; then
+            base_commit=$CONTEXT_PUSH_BEFORE
+          else
+            echo "Unknown event type: $CONTEXT_EVENT"
+            exit 1
+          fi
+          echo "Base commit: $base_commit"
+          git fetch origin $base_commit
+          diff=$(git diff --name-only --diff-filter=AMRD $base_commit | tr '\n' ' ')
           echo "Changed files: $diff"
           echo "CHANGED_FILES=$diff" >> "$GITHUB_OUTPUT"
 
