@@ -21,7 +21,13 @@ jobs:
       changed: ${{ steps.changed_addons.outputs.changed }}
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4
+
+      - name: test GH context
+        run: |
+          echo "$GITHUB_CONTEXT"| jq
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
 
       - name: Get changed files
         id: changed_files
