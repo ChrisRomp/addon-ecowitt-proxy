@@ -23,37 +23,26 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v4
 
-      - name: test GH context
-        run: |
-          echo "$GITHUB_CONTEXT"| jq
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-
       - name: Get changed files
         id: changed_files
         env:
           CONTEXT_BASE_REF: ${{ github.base_ref }}
           CONTEXT_EVENT: ${{ github.event_name }}
           CONTEXT_PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          CONTEXT_PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           CONTEXT_PUSH_BEFORE: ${{ github.event.before }}
-          CONTEXT_PUSH_AFTER: ${{ github.event.after }}
         run: |
           set -e
           echo "Base ref: $CONTEXT_BASE_REF"
           echo "Actions event: $CONTEXT_EVENT"
           if [ "$CONTEXT_EVENT" == "pull_request" ]; then
             base_commit=$CONTEXT_PR_BASE_SHA
-            head_commit=$CONTEXT_PR_HEAD_SHA
           elif [ "$CONTEXT_EVENT" == "push" ]; then
             base_commit=$CONTEXT_PUSH_BEFORE
-            head_commit=$CONTEXT_PUSH_AFTER
           else
             echo "Unknown event type: $CONTEXT_EVENT"
             exit 1
           fi
           echo "Base commit: $base_commit"
-          echo "Head commit: $head_commit"
           git fetch origin $base_commit
           diff=$(git diff --name-only --diff-filter=AMRD $base_commit | tr '\n' ' ')
           echo "Changed files: $diff"
