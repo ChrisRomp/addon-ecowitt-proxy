@@ -33,7 +33,7 @@ jobs:
         id: changed_files
         env:
           CONTEXT_BASE_REF: ${{ github.base_ref }}
-          CONTEXT_EVENT: ${{ github.event }}
+          CONTEXT_EVENT: ${{ github.event_name }}
           CONTEXT_PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           CONTEXT_PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           CONTEXT_PUSH_BEFORE: ${{ github.event.before }}
