@@ -29,7 +29,11 @@ jobs:
         run: |
           set -e
           git fetch origin main
-          diff=$(git diff --name-only --diff-filter=AMRD origin/main | tr '\n' ' ')
+          if [ "$(git branch --show-current)" == "main" ]; then
+            diff=$(git diff --name-only --diff-filter=AMRD origin/main~1 | tr '\n' ' ')
+          else
+            diff=$(git diff --name-only --diff-filter=AMRD origin/main | tr '\n' ' ')
+          fi
           echo "Changed files: $diff"
           echo "CHANGED_FILES=$diff" >> "$GITHUB_OUTPUT"
 
