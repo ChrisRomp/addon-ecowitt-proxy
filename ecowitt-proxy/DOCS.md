@@ -6,11 +6,11 @@ In your Ecowitt gateway, configure as you would for the [Home Assistant Ecowitt 
 
 ## Ecowitt Configuration - Customized Service
 
-| Setting | Value |
-| - | - |
-| Customized | Enable |
-| Protocol Type | Ecowitt |
-| Server IP / Hostname | Your Home Assistant server IP or DNS name |
-| Path | `/log/ha` |
-| Port | Set to the port configured for the add-on, default 8081 |
-| Upload Interval | Your choice |
+![Ecowitt Configuration](ecowitt-config.png)
+
+- Customized: Enable
+- Protocol Type: Ecowitt
+- Server IP / Hostname: Your Home Assistant base URL
+- Path: `/log/ha`
+- Port: Set to the same port configured in the add-on, default 8082
+- Upload interval: Your choice
