@@ -1,6 +1,6 @@
 name: "Ecowitt HTTP Proxy"
 description: "An HTTP proxy for Ecowitt weather stations to forward to the Ecowitt integration over HTTPS since Ecowitt does not support HTTPS."
-version: "0.1.18"
+version: "1.0.0"
 slug: ecowitt-proxy
 homeassistant_api: true
 init: false
@@ -13,7 +13,7 @@ arch:
 host_network: true
 options:
   Webhook_ID: ""
-  TCP_Port: 8081
+  TCP_Port: 8082
 schema:
-  Webhook_ID: str
-  TCP_Port: int
+  Webhook_ID: "match(^[a-fA-F0-9]{32}$)"
+  TCP_Port: "int(1024,65535)"

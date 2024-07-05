@@ -1,6 +1,9 @@
 {
-  "name": "Example Home Assistant add-on repository",
+  "name": "Example Home Assistant add-on Codespace",
   "image": "ghcr.io/home-assistant/devcontainer:addons",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
   "appPort": ["7123:8123", "7357:4357"],
   "postStartCommand": "bash devcontainer_bootstrap",
   "runArgs": ["-e", "GIT_EDITOR=code --wait", "--privileged"],
@@ -23,7 +26,7 @@
         "editor.formatOnType": true,
         "files.trimTrailingWhitespace": true
       },
-      "extensions": ["timonwong.shellcheck", "esbenp.prettier-vscode"]
+      "extensions": ["timonwong.shellcheck", "esbenp.prettier-vscode", "ms-python.python"]
     }
   }
 }
