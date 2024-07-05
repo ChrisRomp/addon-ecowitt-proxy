@@ -6,8 +6,6 @@ In your Ecowitt gateway, configure as you would for the [Home Assistant Ecowitt 
 
 ## Ecowitt Configuration - Customized Service
 
-![Ecowitt Configuration](ecowitt-config.png)
-
 - Customized: Enable
 - Protocol Type: Ecowitt
 - Server IP / Hostname: Your Home Assistant base URL
