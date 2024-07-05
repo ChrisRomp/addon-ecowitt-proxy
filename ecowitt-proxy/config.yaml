@@ -16,4 +16,4 @@ options:
   TCP_Port: 8081
 schema:
   Webhook_ID: "match(^[a-fA-F0-9]{32}$)"
-  TCP_Port: int
+  TCP_Port: "int(1024,65535)"
