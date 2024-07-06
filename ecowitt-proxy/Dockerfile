@@ -15,7 +15,7 @@ LABEL \
   io.hass.type="addon" \
   io.hass.arch="armhf|aarch64|i386|amd64|armv7" \
   org.opencontainers.image.authors="Chris Romp" \
-  org.opencontainers.image.description="An HTTP receiver for Ecowitt data for sending to the Home Assistant integration." \
+  org.opencontainers.image.description="An HTTP receiver for Ecowitt data for sending to the Home Assistant integration."
   # org.opencontainers.image.source="https://github.com/ChrisRomp/addon-ecowitt-proxy"
 
 WORKDIR /app
