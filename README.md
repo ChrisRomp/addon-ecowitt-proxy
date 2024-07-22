@@ -1,6 +1,26 @@
 # Home Assistant Ecowitt Proxy add-on repository
 
+This repository contains a Home Assitant add-on for an HTTP proxy to enable using the Ecowitt data feed when Home Assistant is exposed over HTTPS.
+
+## Installation
+
+To add this repository to your Home Assistant Add-On store, click the button below.
+
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fchrisromp%2Faddon-ecowitt-proxy)
+
+If the above redirect button does not work, or you wish to install manually, here are the steps (or you can refer to the [official documentation](https://www.home-assistant.io/common-tasks/os#installing-third-party-add-ons)):
+
+1. Browse to [Settings > Add-ons](https://my.home-assistant.io/redirect/supervisor) in Home Assistant
+1. Click the Add-On Store button in the lower right
+1. Click the vertical `...` menu in the upper-right corner and select "Repositories"
+1. Enter the URL for this repository: `https://github.com/ChrisRomp/addon-ecowitt-proxy`
+1. Click "Add" after the text field
+
+You should now see a section in the Add-On Store called "Ecowitt Proxy add-on repository" which contains this Add-on, from which you can install it.
+
+If you do not see the repository in the store, please refer to the [Home Assistant documentation](https://www.home-assistant.io/common-tasks/os#help-repository-is-not-showing-up) for additional help.
+
+Please refer to the [Add-on documentation](ecowitt-proxy/DOCS.md) for next steps within Home Assistant.
 
 ## Add-ons
 
