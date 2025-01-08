@@ -2,6 +2,11 @@
 
 # Ecowitt Proxy Add-On
 
+## 1.1.0
+
+- Fix for the installation error related to 'externally-managed-environment' by adding the `--break-system-packages` argument to the `pip install` command.
+- Split the `apk` and `pip` commands into separate `RUN` instructions.
+
 ## 1.0.1
 
 - Fixing release notes for v1.0.0 - Note the **BREAKING CHANGE** which modifies the default port. If you were using the default before, be sure to update your configuration to reset it to 8081
