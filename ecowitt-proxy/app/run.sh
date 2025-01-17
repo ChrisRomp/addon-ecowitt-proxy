@@ -7,3 +7,4 @@ export HA_WEBHOOK_ID=$HA_WEBHOOK_ID
 export HA_AUTH_TOKEN=$SUPERVISOR_TOKEN
 export ECOWITT_PROXY_PORT=$ECOWITT_PROXY_PORT
 python3 receiver.py
+# temp change to trick builder
