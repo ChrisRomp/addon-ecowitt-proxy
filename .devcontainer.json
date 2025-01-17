@@ -26,7 +26,13 @@
         "editor.formatOnType": true,
         "files.trimTrailingWhitespace": true
       },
-      "extensions": ["timonwong.shellcheck", "esbenp.prettier-vscode", "ms-python.python"]
+      "extensions": [
+        "timonwong.shellcheck",
+        "esbenp.prettier-vscode",
+        "ms-python.python",
+        "GitHub.copilot",
+        "GitHub.vscode-github-actions"
+      ]
     }
   }
 }
