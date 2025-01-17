@@ -1,3 +1,5 @@
+# This workflow builds and tests changed add-ons in multiple architectures
+# Source: https://github.com/home-assistant/addons-example/blob/main/.github/workflows/builder.yaml
 name: Builder
 
 env:
@@ -20,6 +22,7 @@ on:
 
 jobs:
   init:
+    # Collects changed files and identifies changed add-ons
     runs-on: ubuntu-latest
     name: Initialize builds
     outputs:
@@ -84,6 +87,7 @@ jobs:
             echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
           fi
   build:
+    # Builds and pushes images for each changed add-on and valid architecture
     needs: init
     runs-on: ubuntu-latest
     if: needs.init.outputs.changed == 'true'
