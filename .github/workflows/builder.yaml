@@ -87,8 +87,8 @@ jobs:
           for addon in ${{ steps.addons.outputs.addons }}; do
             if [[ "${{ steps.changed_files.outputs.CHANGED_FILES }}" =~ $addon ]]; then
               for file in ${{ env.MONITORED_FILES }}; do
-                  echo "Checking if $addon/$file is in changed files: $CHANGED_FILES"
-                  if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
+                  echo "Checking if $addon/$file is in changed files: ${{ steps.changed_files.outputs.CHANGED_FILES }}"
+                  if [[ "${{ steps.changed_files.outputs.CHANGED_FILES }}" =~ $addon/$file ]]; then
                     echo "Matched $addon/$file."
                     if [[ ! "${changed_addons[@]}" =~ $addon ]]; then
                       changed_addons+=("\"${addon}\",");
