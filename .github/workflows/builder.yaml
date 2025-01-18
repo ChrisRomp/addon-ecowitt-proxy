@@ -108,6 +108,7 @@ jobs:
           else
             echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
           fi
+
   build:
     # Builds and pushes images for each changed add-on and valid architecture
     needs: init
@@ -129,6 +130,7 @@ jobs:
       - name: Get information
         id: info
         uses: home-assistant/actions/helpers/info@master
+        # ref: https://github.com/home-assistant/actions/blob/master/helpers/info/action.yml
         with:
           path: "./${{ matrix.addon }}"
 

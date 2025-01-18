@@ -17,3 +17,4 @@ options:
 schema:
   Webhook_ID: "match(^[a-fA-F0-9]{32}$)"
   TCP_Port: "int(1024,65535)"
+image: "ghcr.io/chrisromp/addon-ecowitt-proxy/ecowitt-proxy/{arch}"
