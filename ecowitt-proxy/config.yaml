@@ -1,6 +1,6 @@
 name: "Ecowitt HTTP Proxy"
 description: "An HTTP proxy for Ecowitt weather stations to forward to the Ecowitt integration over HTTPS since Ecowitt does not support HTTPS."
-version: "1.1.0"
+version: "1.1.1"
 slug: ecowitt-proxy
 homeassistant_api: true
 init: false
@@ -17,3 +17,4 @@ options:
 schema:
   Webhook_ID: "match(^[a-fA-F0-9]{32}$)"
   TCP_Port: "int(1024,65535)"
+image: "ghcr.io/chrisromp/addon-ecowitt-proxy/ecowitt-proxy/{arch}"

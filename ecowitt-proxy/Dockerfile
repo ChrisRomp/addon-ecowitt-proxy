@@ -12,7 +12,7 @@ RUN chmod a+x /app/run.sh
 
 # ChrisRomp@users.noreply.github.com
 LABEL \
-  io.hass.version="1.1.0" \
+  io.hass.version="1.1.1" \
   io.hass.type="addon" \
   io.hass.arch="armhf|aarch64|i386|amd64|armv7" \
   org.opencontainers.image.authors="Chris Romp" \

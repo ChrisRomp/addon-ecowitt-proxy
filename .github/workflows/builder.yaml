@@ -1,3 +1,5 @@
+# This workflow builds and tests changed add-ons in multiple architectures
+# Source: https://github.com/home-assistant/addons-example/blob/main/.github/workflows/builder.yaml
 name: Builder
 
 env:
@@ -9,17 +11,18 @@ on:
     branches:
       - main
     paths-ignore:
-      - '.github/**'
-      - '.vscode/**'
+      - ".github/**"
+      - ".vscode/**"
   pull_request:
     branches:
       - main
     paths-ignore:
-      - '.github/**'
-      - '.vscode/**'
+      - ".github/**"
+      - ".vscode/**"
 
 jobs:
   init:
+    # Collects changed files and identifies changed add-ons
     runs-on: ubuntu-latest
     name: Initialize builds
     outputs:
@@ -54,9 +57,28 @@ jobs:
           echo "Changed files: $diff"
           echo "CHANGED_FILES=$diff" >> "$GITHUB_OUTPUT"
 
+      # - name: Find add-on directories
+      #   id: addons
+      #   uses: home-assistant/actions/helpers/find-addons@master
+      #   # ref: https://github.com/home-assistant/actions/blob/master/helpers/find-addons/action.yml
+
       - name: Find add-on directories
         id: addons
-        uses: home-assistant/actions/helpers/find-addons@master
+        run: |
+          declare -a addons
+          declare -a addons_list
+
+          for addon in $(find ./ -maxdepth 2 -name config.json -o -name config.yaml -o -name config.yml | cut -d "/" -f2 | sort -u); do
+            addons+=("${addon}");
+            addons_list+=("\"${addon}\",");
+          done
+
+          json_list=$(echo ${addons_list[@]} | rev | cut -c 2- | rev)
+
+          echo "Found addons: ${addons[@]}"
+          echo "Found addons (JSON): [${json_list}]"
+          echo "addons=${addons[@]}" >> "$GITHUB_OUTPUT"
+          echo "addons_list=[${json_list}]" >> "$GITHUB_OUTPUT"
 
       - name: Get changed add-ons
         id: changed_addons
@@ -65,9 +87,12 @@ jobs:
           for addon in ${{ steps.addons.outputs.addons }}; do
             if [[ "${{ steps.changed_files.outputs.CHANGED_FILES }}" =~ $addon ]]; then
               for file in ${{ env.MONITORED_FILES }}; do
+                  echo "Checking if $addon/$file is in changed files: ${{ steps.changed_files.outputs.CHANGED_FILES }}"
                   if [[ "${{ steps.changed_files.outputs.CHANGED_FILES }}" =~ $addon/$file ]]; then
+                    echo "Matched $addon/$file."
                     if [[ ! "${changed_addons[@]}" =~ $addon ]]; then
                       changed_addons+=("\"${addon}\",");
+                      echo "Added $addon to changed add-ons."
                     fi
                   fi
               done
@@ -83,7 +108,9 @@ jobs:
           else
             echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
           fi
+
   build:
+    # Builds and pushes images for each changed add-on and valid architecture
     needs: init
     runs-on: ubuntu-latest
     if: needs.init.outputs.changed == 'true'
@@ -92,22 +119,29 @@ jobs:
       matrix:
         addon: ${{ fromJson(needs.init.outputs.changed_addons) }}
         arch: ["aarch64", "amd64", "armhf", "armv7", "i386"]
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4
 
       - name: Get information
         id: info
         uses: home-assistant/actions/helpers/info@master
+        # ref: https://github.com/home-assistant/actions/blob/master/helpers/info/action.yml
         with:
           path: "./${{ matrix.addon }}"
 
       - name: Check if add-on should be built
         id: check
         run: |
-          if [[ "${{ steps.info.outputs.architectures }}" =~ ${{ matrix.arch }} ]]; then
-             echo "build_arch=true" >> $GITHUB_OUTPUT;
+          if [[ "${{ steps.info.outputs.image }}" == "null" ]]; then
+            echo "Image property is not defined, skipping build"
+            echo "build_arch=false" >> $GITHUB_OUTPUT;
+          elif [[ "${{ steps.info.outputs.architectures }}" =~ ${{ matrix.arch }} ]]; then
+            echo "build_arch=true" >> $GITHUB_OUTPUT;
              echo "image=$(echo ${{ steps.info.outputs.image }} | cut -d'/' -f3)" >> $GITHUB_OUTPUT;
              if [[ -z "${{ github.head_ref }}" ]] && [[ "${{ github.event_name }}" == "push" ]]; then
                  echo "BUILD_ARGS=" >> $GITHUB_ENV;
@@ -117,13 +151,13 @@ jobs:
              echo "build_arch=false" >> $GITHUB_OUTPUT;
           fi
 
-      # - name: Login to GitHub Container Registry
-      #   if: env.BUILD_ARGS != '--test'
-      #   uses: docker/login-action@v2.2.0
-      #   with:
-      #     registry: ghcr.io
-      #     username: ${{ github.repository_owner }}
-      #     password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        if: env.BUILD_ARGS != '--test'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build ${{ matrix.addon }} add-on
         if: steps.check.outputs.build_arch == 'true'
