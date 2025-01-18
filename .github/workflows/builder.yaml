@@ -85,7 +85,7 @@ jobs:
         run: |
           declare -a changed_addons
           for addon in ${{ steps.addons.outputs.addons }}; do
-            if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon ]]; then
+            if [[ "${{ steps.changed_files.outputs.CHANGED_FILES }}" =~ $addon ]]; then
               for file in ${{ env.MONITORED_FILES }}; do
                   echo "Checking if $addon/$file is in changed files: $CHANGED_FILES"
                   if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
