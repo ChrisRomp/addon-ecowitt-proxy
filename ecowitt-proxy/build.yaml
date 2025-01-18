@@ -4,3 +4,8 @@ build_from:
   armhf: ghcr.io/hassio-addons/base:stable
   armv7: ghcr.io/hassio-addons/base:stable
   i386: ghcr.io/hassio-addons/base:stable
+labels:
+  org.opencontainers.image.title: "Home Assistant Add-on: Ecowitt Proxy"
+  org.opencontainers.image.description: "An HTTP receiver for Ecowitt data for sending to the Home Assistant integration."
+  org.opencontainers.image.source: "https://github.com/ChrisRomp/addon-ecowitt-proxy"
+  org.opencontainers.image.licenses: "Apache License 2.0"
